@@ -212,6 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     document.addEventListener("keydown", function (e) {
+        e.preventDefault();
         var char = e.keycode || e.which || e.charCode;
         var ndir = null;
         if (interval != null) {
@@ -237,7 +238,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 case KEY.RESET:
                     endGame();
                     init();
-                    break
+                    break;
+                default:
+                    return false;
             }
             if (ndir != null && ndir != dir && !paused) {
                 directions.push(ndir);

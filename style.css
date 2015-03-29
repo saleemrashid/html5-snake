@@ -5,10 +5,6 @@ body {
     padding: 0px;
 }
 
-* {
-    overflow: hidden;
-}
-
 main {
     background: #FFFFFF;
     width: 600px;
