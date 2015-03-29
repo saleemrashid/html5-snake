@@ -1,15 +1,23 @@
 body {
-    text-align: center;
+    position: absolute;
     background: #F5F5F5;
     margin: 0px;
     padding: 0px;
+    height: 100%;
+    width: 100%;
 }
 
 main {
     background: #FFFFFF;
     padding: 0px 2em;
     text-align: left;
-    display: inline-block;
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin: auto;
     height: 100%;
 }
 
