@@ -3,7 +3,6 @@ body {
     background: #F5F5F5;
     margin: 0px;
     padding: 0px;
-    height: 100%;
     width: 100%;
 }
 
@@ -13,11 +12,10 @@ main {
     text-align: left;
     display: block;
     position: absolute;
-    top: 0px;
     left: 0px;
     right: 0px;
-    bottom: 0px;
     margin: auto;
+    overflow: auto !important;
 }
 
 main, #game {
