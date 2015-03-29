@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
     var interval = null;
 
     var snake = [];
@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var bounds = true;
 
-    var canvas = document.getElementById('game');
-    var ctx = canvas.getContext('2d');
+    var canvas = document.getElementById("game");
+    var ctx = canvas.getContext("2d");
 
     var cellWidth = 10;
     var cells = { x: 0, y: 0, height: canvas.height / cellWidth,
@@ -91,28 +91,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function drawSnake() {
         for (var i = 0; i < snake.length; i++) {
-            drawCell(snake[i].x, snake[i].y, 'blue');
+            drawCell(snake[i].x, snake[i].y, "blue");
         }
     }
 
     function drawFood() {
-        drawCell(food.x, food.y, 'red');
+        drawCell(food.x, food.y, "red");
     }
 
     function drawInfo() {
         ctx.lineWidth = 1;
-        ctx.strokeStyle = bounds ? 'black' : 'red';
+        ctx.strokeStyle = bounds ? "black" : "red";
         ctx.strokeRect(1, 1, canvas.width - 2, canvas.height - 2);
-        ctx.fillStyle = 'grey';
-        ctx.font = 'Bold ' + cellWidth + 'px Sans-Serif';
-        var scoreText = 'Score: ' + pad(score * 1000, 20);
+        ctx.fillStyle = "grey";
+        ctx.font = "Bold " + cellWidth + "px Sans-Serif";
+        var scoreText = "Score: " + pad(score * 1000, 20);
         ctx.fillText(scoreText, cellWidth, cellWidth * 1.5 );
     }
 	
 	function pad(num, digits)  {
 		var str = num.toString();
 		while (str.length < digits) {
-			str = '0' + str;
+			str = "0" + str;
 		}
 		return str;
 	}
@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    document.addEventListener('keydown', function (e) {
+    document.addEventListener("keydown", function (e) {
         var char = e.keycode || e.which || e.charCode;
         var ndir = null;
         if (interval != null) {
