@@ -7,11 +7,14 @@ body {
 
 main {
     background: #FFFFFF;
-    width: 600px;
     padding: 0px 2em;
     text-align: left;
     display: inline-block;
     height: 100%;
+}
+
+main, #game {
+    width: 600px;
 }
 
 #game {
