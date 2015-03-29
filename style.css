@@ -1,0 +1,27 @@
+body {
+    text-align: center;
+    background: #F5F5F5;
+    margin: 0px;
+    padding: 0px;
+}
+
+* {
+    overflow: hidden;
+}
+
+main {
+    background: #FFFFFF;
+    width: 600px;
+    padding: 0px 2em;
+    text-align: left;
+    display: inline-block;
+    height: 100%;
+}
+
+#game {
+    text-align: center;
+}
+
+section {
+    padding: 2em 0px;
+}
