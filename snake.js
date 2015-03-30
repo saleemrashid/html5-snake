@@ -69,9 +69,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         clearCanvas();
         drawSnake();
-        if (bounds && checkEdge()) {
-            endGame();
-        }
         if (checkFood()) {
             eat();
             createFood();
@@ -79,11 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
         moveSnake();
         drawFood();
         drawInfo();
-        if (checkSuicide()) {
-            endGame();
-            setTimeout(init, 1000);
-        }
-        if (bounds && checkEdge()) {
+        if (bounds && checkEdge() || checkSuicide()) {
             endGame();
             setTimeout(init, 1000);
         }
