@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ctx.strokeRect(0.5, 0.5, cells.width * cellWidth - 1, cells.height * cellWidth - 1);
         ctx.fillStyle = "black";
         ctx.font = "Bold " + cellWidth + "px Roboto";
-        var scoreText = "Score: " + pad(score * 1000, 20);
+        var scoreText = "Score: " + pad(score * 50, 6);
         ctx.fillText(scoreText, cellWidth, cellWidth * (cells.height + 1.5) );
     }
 	
