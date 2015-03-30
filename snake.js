@@ -93,8 +93,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function drawInfo() {
-        var border = bounds ? "black" : "red";
-        canvas.style.border = "1px solid " + border;
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = bounds ? "black" : "red";
+        ctx.strokeRect(1, 1, canvas.width - 2, canvas.height - 2);
         ctx.fillStyle = "grey";
         ctx.font = "Bold " + cellWidth + "px Sans-Serif";
         var scoreText = "Score: " + pad(score * 1000, 20);
