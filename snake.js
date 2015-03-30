@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
         dir = DIRECTION.RIGHT;
         directions = [];
         bounds = true;
-        cells = { x: 0, y: 0, height: canvas.height / cellWidth - 1, 
+        cells = { x: 0, y: 0, height: canvas.height / cellWidth - 2, 
             width: canvas.width / cellWidth };
 
         createSnake(5);
@@ -96,9 +96,9 @@ document.addEventListener("DOMContentLoaded", function () {
         ctx.strokeStyle = bounds ? "black" : "red";
         ctx.strokeRect(0.5, 0.5, cells.width * cellWidth - 1, cells.height * cellWidth - 1);
         ctx.fillStyle = "black";
-        ctx.font = "Bold " + cellWidth + "px Sans-Serif";
+        ctx.font = "Bold " + cellWidth + "px Roboto";
         var scoreText = "Score: " + pad(score * 1000, 20);
-        ctx.fillText(scoreText, cellWidth, cellWidth * (cells.height + 1) );
+        ctx.fillText(scoreText, cellWidth, cellWidth * (cells.height + 1.5) );
     }
 	
 	function pad(num, digits)  {

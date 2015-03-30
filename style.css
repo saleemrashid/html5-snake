@@ -1,3 +1,7 @@
+* {
+    font-family: "Roboto" !important;
+}
+
 body {
     position: absolute;
     background: #F5F5F5;
