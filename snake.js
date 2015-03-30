@@ -204,9 +204,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     document.addEventListener("keydown", function (e) {
-        e.preventDefault();
         var char = e.keycode || e.which || e.charCode;
         var ndir = null;
+
+        if (!paused) {
+            e.preventDefault();
+        }
+
         if (interval != null) {
             switch (char) {
                 case DIRECTION.LEFT:
@@ -232,7 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     init();
                     break;
                 default:
-                    return false;
+                    return;
             }
             if (ndir != null && ndir != dir && !paused) {
                 directions.push(ndir);
