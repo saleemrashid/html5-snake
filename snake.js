@@ -225,7 +225,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     paused = !paused;
                     break;
                 case KEY.BOUNDS:
-                    bounds = false;
+                    bounds = !bounds;
                     break;
                 case KEY.RESET:
                     endGame();
