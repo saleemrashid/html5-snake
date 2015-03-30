@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function drawInfo() {
         ctx.lineWidth = 1;
-        ctx.strokeStyle = bounds ? "black" : "red";
+        ctx.strokeStyle = bounds ? "black" : "white";
         ctx.strokeRect(0.5, 0.5, cells.width * cellWidth - 1, cells.height * cellWidth - 1);
         ctx.fillStyle = "black";
         ctx.font = "Bold " + cellWidth + "px Roboto";
