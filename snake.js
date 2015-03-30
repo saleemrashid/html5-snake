@@ -19,8 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var ctx = canvas.getContext("2d");
 
     var cellWidth = 10;
-    var cells = { x: 0, y: 0, height: canvas.height / cellWidth,
-        width: canvas.width / cellWidth };
+    var cells = {};
 
     init();
 
@@ -30,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
         dir = DIRECTION.RIGHT;
         directions = [];
         bounds = true;
-        cells = { x: 0, y: 0, height: canvas.height / cellWidth, 
+        cells = { x: 0, y: 0, height: canvas.height / cellWidth - 1, 
             width: canvas.width / cellWidth };
 
         createSnake(5);
@@ -95,11 +94,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function drawInfo() {
         ctx.lineWidth = 1;
         ctx.strokeStyle = bounds ? "black" : "red";
-        ctx.strokeRect(1, 1, canvas.width - 2, canvas.height - 2);
-        ctx.fillStyle = "grey";
+        ctx.strokeRect(0.5, 0.5, cells.width * cellWidth - 1, cells.height * cellWidth - 1);
+        ctx.fillStyle = "black";
         ctx.font = "Bold " + cellWidth + "px Sans-Serif";
         var scoreText = "Score: " + pad(score * 1000, 20);
-        ctx.fillText(scoreText, cellWidth, cellWidth * 1.5 );
+        ctx.fillText(scoreText, cellWidth, cellWidth * (cells.height + 1) );
     }
 	
 	function pad(num, digits)  {
