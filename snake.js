@@ -83,19 +83,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function drawSnake() {
         for (var i = 0; i < snake.length; i++) {
-            drawCell(snake[i].x, snake[i].y, "blue");
+            drawCell(snake[i].x, snake[i].y, "#0000FF");
         }
     }
 
     function drawFood() {
-        drawCell(food.x, food.y, "red");
+        drawCell(food.x, food.y, "#FF0000");
     }
 
     function drawInfo() {
         ctx.lineWidth = 1;
-        ctx.strokeStyle = bounds ? "black" : "white";
+        ctx.strokeStyle = bounds ? "#000000" : "#BBBBBB";
         ctx.strokeRect(0.5, 0.5, cells.width * cellWidth - 1, cells.height * cellWidth - 1);
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "#000000";
         ctx.font = "Bold " + cellWidth + "px Roboto";
         var scoreText = "Score: " + pad(score * 50, 6);
         ctx.fillText(scoreText, cellWidth, cellWidth * (cells.height + 1.5) );
