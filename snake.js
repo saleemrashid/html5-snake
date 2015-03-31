@@ -251,6 +251,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     break;
                 case KEY.PAUSE:
                     paused = !paused;
+                    date = new Date();
                     break;
                 case KEY.BOUNDS:
                     bounds = !bounds;
