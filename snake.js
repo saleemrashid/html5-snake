@@ -68,8 +68,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function paint() {
         clearCanvas();
-        drawSnake();
         drawFood();
+        drawSnake();
         drawInfo();
 
         var speed = 250 / snake.length;
