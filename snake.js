@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
         drawFood();
         drawInfo();
 
-        var speed = 1000 / snake.length;
+        var speed = 500 / snake.length;
 
         var newDate = new Date();
         var diff = newDate - date;
