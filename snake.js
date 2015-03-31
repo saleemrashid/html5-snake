@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function startGame() {
         if (interval == null) {
             date = new Date();
-            interval = setInterval(paint, 4);
+            interval = setInterval(paint, 100);
         }
     }
 
