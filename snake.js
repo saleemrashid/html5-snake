@@ -55,9 +55,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function createSnake(length) {
-        snake = [];
-        for (var i = length; i > 0; i--) {
-            snake.push({ x: i, y: 0 });
+        if (length) {
+            snake = [{ x: 0, y: 0 }];
+            grow(length - 1);
         }
     }
 
