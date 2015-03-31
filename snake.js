@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     var interval = null;
+    var date = 0;
 
     var snake = [];
     var food = {};
@@ -39,7 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function startGame() {
         if (interval == null) {
-            interval = setInterval(paint, 100);
+            date = new Date();
+            interval = setInterval(paint, 4);
         }
     }
 
@@ -63,18 +65,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function paint() {
-        if (paused) {
-            return;
-        }
         clearCanvas();
         drawSnake();
+        drawFood();
+        drawInfo();
+
+        var speed = 1000 / snake.length;
+
+        var newDate = new Date();
+        var diff = newDate - date;
+        if (paused || diff < speed) {
+            return;
+        }
+        date = newDate;
+        
         if (checkFood()) {
             eat();
             createFood();
         }
-        moveSnake();
-        drawFood();
-        drawInfo();
+
+        for (var i = 0; i < Math.floor((diff) / speed); i++) {
+            moveSnake();
+        }
+
         if (bounds && checkEdge() || checkSuicide()) {
             endGame();
             setTimeout(init, 1000);
