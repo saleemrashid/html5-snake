@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var snake = [];
     var food = {};
     var score = 0;
+    var walls = 0;
 
     var paused = false;
 
@@ -26,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function init() {
         score = 0;
+        walls = 0;
         paused = false;
         dir = DIRECTION.RIGHT;
         directions = [];
@@ -110,8 +112,13 @@ document.addEventListener("DOMContentLoaded", function () {
         ctx.strokeRect(0.5, 0.5, cells.width * cellWidth - 1, cells.height * cellWidth - 1);
         ctx.fillStyle = "#000000";
         ctx.font = "Bold " + cellWidth + "px Roboto";
-        var scoreText = "Score: " + pad(score * 50, 6);
-        ctx.fillText(scoreText, cellWidth, cellWidth * (cells.height + 1.5) );
+        setText("score", pad(score * 50, 6));
+        setText("walls", pad(walls, 6));
+    }
+
+    function setText(id, value) {
+        var el = document.getElementById(id);
+        el.textContent = el.innerText = value;
     }
 	
 	function pad(num, digits)  {
@@ -209,8 +216,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     return;
             }
             if (!bounds) {
+                var x = head.x, y = head.y;
                 head.x = (head.x + cells.width) % cells.width;
                 head.y = (head.y + cells.height)  % cells.height;
+                if (x != head.x || y != head.y) {
+                    walls++;
+                }
             }
             snake.unshift(head);
         }
