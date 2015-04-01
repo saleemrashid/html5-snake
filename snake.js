@@ -310,5 +310,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (ndir != null && ndir != dir && !paused) {
             directions.push(ndir);
         }
+
+        draw();
     });
 });
