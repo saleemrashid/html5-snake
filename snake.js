@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var running = false;
-    var date = 0;
+    var interval = null;
+    var date = null;
 
     var snake = [];
     var food = {};
@@ -70,16 +70,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function startGame() {
-        if (!running) {
-            date = 0;
-            running = true;
-            requestAnimationFrame(paint);
+        if (interval == null) {
+            date = null;
+            interval = requestAnimationFrame(paint);
         }
     }
 
     function endGame() {
-        if (running) {
-            running = false;
+        if (interval != null) {
+            cancelAnimationFrame(interval);
+            interval = null;
         }
     }
 
@@ -96,19 +96,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function paint(newDate) {
-        if (!running) {
-            return;
-        }
-
-        clearCanvas();
-        drawFood();
-        drawSnake();
-        drawInfo();
-
         var speed = 500 / snake.length;
 
+        if (!date) {
+            date = newDate - speed;
+        }
+
         var diff = newDate - date;
-        if (!paused && diff >= speed) {
+        if (diff >= speed) {
+            clearCanvas();
+            drawFood();
+            drawSnake();
+            drawInfo();
+
             date = newDate;
             
             if (checkFood()) {
@@ -123,10 +123,11 @@ document.addEventListener("DOMContentLoaded", function () {
             if (bounds && checkEdge() || checkSuicide()) {
                 endGame();
                 setTimeout(init, 1000);
+                return;
             }
         }
 
-        requestAnimationFrame(paint);
+        interval = requestAnimationFrame(paint);
     }
 
     function drawSnake() {
@@ -268,37 +269,40 @@ document.addEventListener("DOMContentLoaded", function () {
             e.preventDefault();
         }
 
-        if (running) {
-            switch (char) {
-                case DIRECTION.LEFT:
-                    ndir = DIRECTION.LEFT;
-                    break;
-                case DIRECTION.UP:
-                    ndir = DIRECTION.UP;
-                    break;
-                case DIRECTION.RIGHT:
-                    ndir = DIRECTION.RIGHT;
-                    break;
-                case DIRECTION.DOWN:
-                    ndir = DIRECTION.DOWN;
-                    break;
-                case KEY.PAUSE:
-                    paused = !paused;
-                    date = new Date();
-                    break;
-                case KEY.BOUNDS:
-                    bounds = !bounds;
-                    break;
-                case KEY.RESET:
+        switch (char) {
+            case DIRECTION.LEFT:
+                ndir = DIRECTION.LEFT;
+                break;
+            case DIRECTION.UP:
+                ndir = DIRECTION.UP;
+                break;
+            case DIRECTION.RIGHT:
+                ndir = DIRECTION.RIGHT;
+                break;
+            case DIRECTION.DOWN:
+                ndir = DIRECTION.DOWN;
+                break;
+            case KEY.PAUSE:
+                paused = !paused;
+                if (paused) {
                     endGame();
-                    init();
-                    break;
-                default:
-                    return;
-            }
-            if (ndir != null && ndir != dir && !paused) {
-                directions.push(ndir);
-            }
+                } else {
+                    startGame();
+                }
+                break;
+            case KEY.BOUNDS:
+                bounds = !bounds;
+                break;
+            case KEY.RESET:
+                endGame();
+                init();
+                break;
+            default:
+                return;
+        }
+
+        if (ndir != null && ndir != dir && !paused) {
+            directions.push(ndir);
         }
     });
 });
