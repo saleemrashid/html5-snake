@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var interval = null;
+    var running = false;
     var date = 0;
 
     var snake = [];
@@ -25,6 +25,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
     init();
 
+    /*
+     * http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+     * http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
+     */
+    (function() {
+        var lastTime = 0;
+        var vendors = ['ms', 'moz', 'webkit', 'o'];
+        for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+            window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+            window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
+                                       || window[vendors[x]+'CancelRequestAnimationFrame'];
+        }
+     
+        if (!window.requestAnimationFrame)
+            window.requestAnimationFrame = function(callback, element) {
+                var currTime = new Date().getTime();
+                var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+                var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+                  timeToCall);
+                lastTime = currTime + timeToCall;
+                return id;
+            };
+     
+        if (!window.cancelAnimationFrame)
+            window.cancelAnimationFrame = function(id) {
+                clearTimeout(id);
+            };
+    }());
+
     function init() {
         score = 0;
         walls = 0;
@@ -41,16 +70,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function startGame() {
-        if (interval == null) {
-            date = new Date();
-            interval = setInterval(paint, 0);
+        if (!running) {
+            date = 0;
+            running = true;
+            requestAnimationFrame(paint);
         }
     }
 
     function endGame() {
-        if (interval != null) {
-            clearInterval(interval);
-            interval = null;
+        if (running) {
+            running = false;
         }
     }
 
@@ -66,7 +95,11 @@ document.addEventListener("DOMContentLoaded", function () {
             y: Math.floor(Math.random() * (cells.height)) };
     }
 
-    function paint() {
+    function paint(newDate) {
+        if (!running) {
+            return;
+        }
+
         clearCanvas();
         drawFood();
         drawSnake();
@@ -74,26 +107,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
         var speed = 500 / snake.length;
 
-        var newDate = new Date();
         var diff = newDate - date;
-        if (paused || diff < speed) {
-            return;
-        }
-        date = newDate;
-        
-        if (checkFood()) {
-            eat();
-            createFood();
+        if (!paused && diff >= speed) {
+            date = newDate;
+            
+            if (checkFood()) {
+                eat();
+                createFood();
+            }
+
+            for (var i = 0; i < Math.floor((diff) / speed); i++) {
+                moveSnake();
+            }
+
+            if (bounds && checkEdge() || checkSuicide()) {
+                endGame();
+                setTimeout(init, 1000);
+            }
         }
 
-        for (var i = 0; i < Math.floor((diff) / speed); i++) {
-            moveSnake();
-        }
-
-        if (bounds && checkEdge() || checkSuicide()) {
-            endGame();
-            setTimeout(init, 1000);
-        }
+        requestAnimationFrame(paint);
     }
 
     function drawSnake() {
@@ -235,7 +268,7 @@ document.addEventListener("DOMContentLoaded", function () {
             e.preventDefault();
         }
 
-        if (interval != null) {
+        if (running) {
             switch (char) {
                 case DIRECTION.LEFT:
                     ndir = DIRECTION.LEFT;
