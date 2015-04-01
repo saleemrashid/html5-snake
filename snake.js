@@ -72,13 +72,15 @@ document.addEventListener("DOMContentLoaded", function () {
     function startGame() {
         if (interval == null) {
             date = null;
-            interval = requestAnimationFrame(paint);
+            interval = requestAnimationFrame(loop);
+            draw();
         }
     }
 
     function endGame() {
         if (interval != null) {
             cancelAnimationFrame(interval);
+            draw();
             interval = null;
         }
     }
@@ -95,19 +97,23 @@ document.addEventListener("DOMContentLoaded", function () {
             y: Math.floor(Math.random() * (cells.height)) };
     }
 
-    function paint(newDate) {
+    function draw() {
+        clearCanvas();
+        drawFood();
+        drawSnake();
+        drawInfo();
+    }
+
+    function loop(newDate) {
         var speed = 500 / snake.length;
 
         if (!date) {
-            date = newDate - speed;
+            date = newDate;
         }
 
         var diff = newDate - date;
         if (diff >= speed) {
-            clearCanvas();
-            drawFood();
-            drawSnake();
-            drawInfo();
+            draw();
 
             date = newDate;
             
@@ -127,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        interval = requestAnimationFrame(paint);
+        interval = requestAnimationFrame(loop);
     }
 
     function drawSnake() {
