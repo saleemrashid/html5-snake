@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         cells = { x: 0, y: 0, height: canvas.height / cellWidth - 2, 
             width: canvas.width / cellWidth };
 
-        createSnake(1);
+        createSnake(5);
         createFood();
         startGame();
     }
