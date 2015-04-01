@@ -38,6 +38,10 @@ section {
     padding: 1em 0px;
 }
 
+#stats kbd {
+    float: right;
+}
+
 #instructions p:nth-of-type(1) {
     float: left;
 }
