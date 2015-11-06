@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
         dir = DIRECTION.RIGHT;
         directions = [];
         bounds = true;
-        cells = { x: 0, y: 0, height: canvas.height / cellWidth - 2, 
+        cells = { x: 0, y: 0, height: canvas.height / cellWidth, 
             width: canvas.width / cellWidth };
 
         createSnake(5);
