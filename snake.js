@@ -158,7 +158,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function setText(id, value) {
         var el = document.getElementById(id);
-        el.textContent = el.innerText = value;
+        if (el !== null) {
+            el.textContent = el.innerText = value;
+        }
     }
 	
 	function pad(num, digits)  {

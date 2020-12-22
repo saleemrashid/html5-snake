@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Snake</title>
+        <script src="snake.js"></script>
+        <style>
+        html, body {
+            margin: 0px;
+            padding: 0px;
+            background: #FFFFFF;
+        }
+
+        canvas {
+            display: block;
+        }
+        </style>
+    </head>
+    <body>
+        <canvas id="game" width="600" height="320"></canvas>
+        <script>
+        (function () {
+            var canvas = document.getElementById("game");
+
+            function onresize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            window.addEventListener("resize", onresize);
+            onresize();
+        })();
+        </script>
+    </body>
+</html>
